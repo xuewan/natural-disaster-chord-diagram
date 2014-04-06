@@ -1,0 +1,17 @@
+.group text {
+ font-size: 9px;
+ font-family: sans-serif;
+}
+
+#province_filter li {
+	display:inline-block; margin:0 10px 0 0;}
+}
+
+.filter {
+	color:#778899; 
+	font-size:.75em; 
+}
+.selected {
+	color:#708090;
+	font-weight:bold; 
+}
