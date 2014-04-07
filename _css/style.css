@@ -11,6 +11,9 @@ h1 {
  font-family: sans-serif;
 }
 
+ul {
+	list-style: none;
+}
 #province_filter li {
 	display:inline-block; margin:0 20px 0 0;}
 }
@@ -22,4 +25,48 @@ h1 {
 .selected {
 	color:#708090;
 	font-weight:bold; 
+}
+
+.chord-diagram {
+	float: left;
+	margin: 0 5px 0 0;
+}
+/*.barChart-label {
+	font-size: 10px;
+	font-family: sans-serif;
+	color: #696969;
+	text-anchor: end;
+}*/
+.x-axis text {
+	font: 10px sans-serif;
+	color: #696969;
+}
+.y-axis text {
+	font: 10px sans-serif;
+	color: #696969;
+}
+
+.x-axis path {
+  fill: none;
+  stroke: #708090;
+  shape-rendering: crispEdges;
+}
+.y-axis path{
+  fill: none;
+  stroke: #708090;
+  shape-rendering: crispEdges;
+}
+.x-axis line{
+  fill: none;
+  stroke: #708090;
+  shape-rendering: crispEdges;
+}
+.y-axis line {
+  fill: none;
+  stroke: #708090;
+  shape-rendering: crispEdges;
+}
+.barChart-title {
+	font: 18px sans-serif;
+	color: #696969;
 }
