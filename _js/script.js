@@ -18,6 +18,8 @@ $(document).ready(function(){
 	d3.csv("_data/matrix.csv", function(disasterCounts){
 	d3.csv("_data/groups.csv", function(groupNames){
 	d3.csv("_data/disaster.csv", function(disasters){
+
+	//process data for bar chart
 	var allDisasters = d3.nest()
 				.key(function(d){
 					return d.EVENT_TYPE;
@@ -49,6 +51,7 @@ $(document).ready(function(){
 			matrix.push(row);
 		});
 
+	//get chord diagram group names
 		groupNames.forEach(function(d){
 			groupname.push(d.group);
 			colors.push(d.color);
@@ -129,6 +132,7 @@ $(document).ready(function(){
 		  };
 		}
 
+		//fade out when click on filter links
 		function fadeSelectedProv(id, opacity){
 			if(id != 99){
 				chordChart.selectAll(".chord path")
@@ -143,6 +147,7 @@ $(document).ready(function(){
 	  		}
 		}
 
+		//event listener for clicking on filter links
 		$(".filter").on("click", function() {
 	  		$(".filter").removeClass("selected");
 	 		fadeSelectedProv(99, 1);
@@ -231,8 +236,7 @@ $(document).ready(function(){
 					.append("text")
 					.text("All Provinces");
 
-	// }//end drawBarChart function
-
+	//create an update function to change bar chart when clicking on filter link
 	function updateBarChart(provname){
 		var newData =[];
 		disasterByProv.forEach(function(d){
@@ -249,13 +253,7 @@ $(document).ready(function(){
 			newData.push({"key": event_type, "values": value});
 		});
 		
-		//redraw the bars
-		// newData.sort(function(a,b){
-		// 			return b.values - a.values;
-		// 		});
-		// console.log("new data:", newData);
-		// yScale.domain([0,newData[0].values]);
-		// yAxisScale.domain([0, newData[0].values]);
+		//rescale the y axis if necessary
 		newMax = findMaxNumDisaster(newData);
 		if (newMax <5){
 			newMax = 5;
@@ -264,7 +262,7 @@ $(document).ready(function(){
 		yScale.domain([0,newMax]);
 		yAxisScale.domain([0, newMax]);
 
-
+		//redraw bars
 		barChart.selectAll("rect")
 				.data(newData)
 				.transition().duration(1500)
@@ -277,7 +275,8 @@ $(document).ready(function(){
 				})
 				.attr("width",xScale.rangeBand()-15)
 				.style("fill", "#4682B4");
-   		
+
+   		//redraw y-axis
    		barChart.select(".y-axis")
 				.call(yAxis)
 				.transition().duration(1500);
@@ -290,6 +289,7 @@ $(document).ready(function(){
 }); //end d3.csv disasterCounts.csv i.e the matrix
 }); //$(docutment).ready
 
+//helper function
 function findMaxNumDisaster(data){
 	var max = 0;
 	for (var i=0; i<data.length; i++){
